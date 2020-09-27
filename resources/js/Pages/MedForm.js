@@ -12,11 +12,16 @@ function MedForm({ user }) {
         <>
             <div>MedForm</div>
             <div>{user.email}</div>
-            <div>{meds && meds}</div>
             <input type='text' onChange={e => setSearch(e.target.value)} />
             <button onClick={()=> dispatch(fetchMeds(search))}>
                 Fetch Meds
             </button>
+            <div>{meds && 'Results: ' + meds.length}</div>
+            {meds && meds.map(item => 
+                <div key={item.id}>
+                    {item.name}, {item.package}: ${item.price}
+                </div>    
+            )}
         </>
     );
 }

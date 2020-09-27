@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Med;
+use App\Http\Resources\Med as MedResource;
 use Illuminate\Http\Request;
 
 class MedController extends Controller
@@ -19,7 +20,9 @@ class MedController extends Controller
 
     public function search($med)
     {
-        return response([$med]);
+        $this->authorize('user');
+        $meds = Med::where('name', 'like', '%'. $med . '%')->get();
+        return MedResource::collection($meds);
     }
 
     /**

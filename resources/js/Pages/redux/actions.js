@@ -9,7 +9,7 @@ export function fetchMeds(med) {
         axios.get(url + 'search/' + med)
         .then(res => dispatch({
             type: FETCH_MEDS,
-            meds: res.data
+            meds: res.data.data
         }))
         .catch(err => {
             console.log(err);
