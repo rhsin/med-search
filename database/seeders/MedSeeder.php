@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Imports\MedsImport;
 use Illuminate\Database\Seeder;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MedSeeder extends Seeder
 {
@@ -13,6 +15,6 @@ class MedSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Excel::import(new MedsImport, 'vaFssPharmPrices.xlsx');
     }
 }

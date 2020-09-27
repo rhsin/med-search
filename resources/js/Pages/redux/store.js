@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 const initialState = {
-    meds: [],
+    meds: []
 };
 
 function reducer(state = initialState, action) {

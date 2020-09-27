@@ -3,10 +3,10 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import MedForm from './MedForm';
 
-function MedSearch(props) {
+function MedSearch({ user }) {
     return (
         <Provider store={store}>
-            <MedForm />
+            <MedForm user={user} />
         </Provider>
     );
 }

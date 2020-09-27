@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MedController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +20,9 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/medsearch', function () {
-    return Inertia\Inertia::render('MedSearch');
+    return Inertia\Inertia::render('MedSearch', ['user' => Auth::user()]);
 })->name('medsearch');
+
+Route::resource('meds', MedController::class);
+
+Route::get('/search/{med}', [MedController::class, 'search']);

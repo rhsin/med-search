@@ -17,6 +17,11 @@ class MedController extends Controller
         //
     }
 
+    public function search($med)
+    {
+        return response([$med]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
