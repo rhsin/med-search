@@ -9,6 +9,13 @@ use Tests\TestCase;
 
 class MedTest extends TestCase
 {
+    public function testMedsDatabase()
+    {
+        $this->assertDatabaseHas('meds', [
+            'name' => 'IBRUTINIB 140MG TAB,ORAL',
+        ]);
+    }
+
     public function testUserCanViewMedSearch()
     {
         $this->actingAs(User::find(1))->get('/medsearch')
