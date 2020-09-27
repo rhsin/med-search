@@ -1,11 +1,12 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-const initialState = {
-    meds: []
+export const initialState = {
+    meds: [],
+    error: null
 };
 
-function reducer(state = initialState, action) {
+export function reducer(state = initialState, action) {
     console.log('reducer', state, action);
 
     switch(action.type) {
@@ -13,6 +14,11 @@ function reducer(state = initialState, action) {
             return {
                 ...state,
                 meds: action.meds
+            };
+        case 'FETCH_MEDS_ERROR':
+            return {
+                ...state,
+                error: action.error
             };
         default:
             return state;

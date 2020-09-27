@@ -7,16 +7,18 @@ function MedForm({ user }) {
 
     const dispatch = useDispatch();
     const meds = useSelector(state => state.meds);
+    const error = useSelector(state => state.error);
 
     return (
         <>
             <div>MedForm</div>
-            <div>{user.email}</div>
+            <div>{user && user.email}</div>
             <input type='text' onChange={e => setSearch(e.target.value)} />
             <button onClick={()=> dispatch(fetchMeds(search))}>
                 Fetch Meds
             </button>
             <div>{meds && 'Results: ' + meds.length}</div>
+            {error && <div>{error}</div>}
             {meds && meds.map(item => 
                 <div key={item.id}>
                     {item.name}, {item.package}: ${item.price}

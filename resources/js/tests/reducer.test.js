@@ -1,27 +1,12 @@
-const { TestScheduler } =  require('jest');
+import { TestScheduler } from 'jest';
+import { initialState, reducer } from '../Pages/redux/store';
 
-const initialState = {
-    meds: []
-};
-
-function reducer(state = initialState, action) {
-    console.log('reducer', state, action);
-
-    switch(action.type) {
-        case 'FETCH_MEDS':
-            return {
-                ...state,
-                meds: action.meds
-            };
-        default:
-            return state;
-    }
-}
-
-const payload = [
+const meds = [
     {id: 1, name: 'Acetamenophen'},
     {id: 2, name: 'Ibuprofen'}
 ]
+
+const error = 'Not Authorized';
 
 describe('reducer', () => {
     test('return initial state', () => {
@@ -29,7 +14,12 @@ describe('reducer', () => {
     });
 
     test('handle FETCH_MEDS', () => {
-        expect(reducer({}, {type: 'FETCH_MEDS', meds: payload}))
-            .toEqual({meds: payload});
+        expect(reducer({}, {type: 'FETCH_MEDS', meds: meds}))
+            .toEqual({meds: meds});
+    });
+
+    test('handle FETCH_MEDS_ERROR', () => {
+        expect(reducer({}, {type: 'FETCH_MEDS_ERROR', error: error}))
+            .toEqual({error: error});
     });
 });
