@@ -15,3 +15,4 @@ sudo service mysql stop
 sudo service mysql start
 
 node node_modules/jest/bin/jest.js
+
