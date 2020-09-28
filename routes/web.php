@@ -26,3 +26,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/medsearch', function () {
 Route::resource('meds', MedController::class);
 
 Route::get('/search/{med}', [MedController::class, 'search']);
+
+Route::get('/first/{med}', [MedController::class, 'searchFirst']);

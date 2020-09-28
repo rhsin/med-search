@@ -18,11 +18,18 @@ class MedController extends Controller
         //
     }
 
-    public function search($med)
+    public function search($name)
     {
         $this->authorize('user');
-        $meds = Med::where('name', 'like', '%'. $med . '%')->get();
+        $meds = Med::where('name', 'like', '%'. $name . '%')->get();
         return MedResource::collection($meds);
+    }
+
+    public function searchFirst($name)
+    {
+        $this->authorize('user');
+        $med = Med::where('name', 'like', '%'. $name . '%')->first();
+        return new MedResource($med);
     }
 
     /**

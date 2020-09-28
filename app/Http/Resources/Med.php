@@ -14,6 +14,11 @@ class Med extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'package' => $this->package,
+            'price' => floatval($this->price)
+        ];
     }
 }

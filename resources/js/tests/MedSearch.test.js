@@ -10,9 +10,9 @@ describe('MedSearch', () => {
         expect(screen.getByText(/Results/)).toBeInTheDocument();
     });
 
-    test('renders MedSearch with button', () => {
+    test('renders MedSearch with input', () => {
         render(<MedSearch />);
-        expect(screen.getByRole('button')).toBeInTheDocument();
+        expect(screen.getByRole('textbox')).toBeInTheDocument();
     });
 
     test('renders MedSearch with user', async () => {

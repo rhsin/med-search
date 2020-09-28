@@ -37,4 +37,10 @@ class MedTest extends TestCase
     {
         $this->get('/search/ibuprofen')->assertStatus(403);
     }
+
+    public function testUserCanSearchFirst()
+    {
+        $this->actingAs(User::find(1))->get('/first/ibuprofen')
+            ->assertStatus(200);
+    }
 }
