@@ -17,9 +17,9 @@ function MedForm({ user }) {
             <button onClick={()=> dispatch(fetchMeds(search))}>
                 Fetch Meds
             </button>
-            <div>{meds && 'Results: ' + meds.length}</div>
+            <div>Results: {meds.length}</div>
             {error && <div>{error}</div>}
-            {meds && meds.map(item => 
+            {meds.map(item => 
                 <div key={item.id}>
                     {item.name}, {item.package}: ${item.price}
                 </div>    
