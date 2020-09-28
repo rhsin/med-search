@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchMeds } from './redux/actions';
+import React, { useState } from 'react'
+import axios from 'axios';
 
-function MedForm({ user }) {
+function MedFormTest({ user }) {
     const [search, setSearch] = useState('search');
+    const [meds, setMeds] = useState([]);
+    const [error, setError] = useState(null);
 
-    const dispatch = useDispatch();
-    const meds = useSelector(state => state.meds);
-    const error = useSelector(state => state.error);
+    const url = 'http://localhost:8000/';
+
+    const fetchMeds = (med) => {
+        axios.get(url + 'search/' + med)
+        .then(res => setMeds(res.data))
+        .catch(err => setError(err.message))
+    };
 
     return (
         <>
             <div>MedForm</div>
             <div>{user && user.email}</div>
             <input type='text' onChange={e => setSearch(e.target.value)} />
-            <button onClick={()=> dispatch(fetchMeds(search))}>
+            <button onClick={()=> fetchMeds(search)}>
                 Fetch Meds
             </button>
             <div>Results: {meds.length}</div>
@@ -30,4 +35,4 @@ function MedForm({ user }) {
     );
 }
 
-export default MedForm;
+export default MedFormTest;

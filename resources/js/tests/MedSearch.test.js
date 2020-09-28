@@ -1,6 +1,7 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
+import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event';
 import MedSearch from '../Pages/MedSearch';
 
 describe('MedSearch', () => {
@@ -15,17 +16,15 @@ describe('MedSearch', () => {
     });
 
     test('renders MedSearch with user', async () => {
-        const user = {email: 'ryan@test.com'}
+        const user = {email: 'ryan@test.com'};
         render(<MedSearch user={user}/>);
         expect(await screen.findByText(/@test.com/)).toBeInTheDocument();
     });
 
-    test('renders MedSearch input change', () => {
+    test('user text input changes display', async () => {
         render(<MedSearch />);
         expect(screen.queryByText(/Ibuprofen/)).toBeNull();
-        fireEvent.change(screen.getByRole('textbox'), {
-            target: {value: 'Ibuprofen'}
-        });
+        await userEvent.type(screen.getByRole('textbox'), 'Ibuprofen');
         expect(screen.getByDisplayValue(/Ibuprofen/)).toBeInTheDocument();
     });
 });
