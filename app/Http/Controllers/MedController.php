@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Med;
+use App\Models\User;
 use App\Http\Resources\Med as MedResource;
 use Illuminate\Http\Request;
 
@@ -12,13 +13,17 @@ class MedController extends Controller
     {
         // $this->authorize('user');
         $meds = Med::where('name', 'like', '%'. $name . '%')->get();
-        return MedResource::collection($meds);
+        if (count($meds) > 0) {
+            return MedResource::collection($meds);
+        } else {
+            abort(404, 'Medication not found');
+        }
     }
 
     public function searchFirst($name)
     {
         // $this->authorize('user');
-        $med = Med::where('name', 'like', '%'. $name . '%')->first();
+        $med = Med::where('name', 'like', '%'. $name . '%')->firstOrFail();
         return new MedResource($med);
     }
 
@@ -26,7 +31,7 @@ class MedController extends Controller
     {
         // $this->authorize('user');
         $user = $request->user();
-        $user->meds()->attach($id);
+        User::find(1)->meds()->attach($id);
         return response('Attached!', 201);
     }
 
@@ -34,7 +39,7 @@ class MedController extends Controller
     {
         // $this->authorize('user');
         $user = $request->user();
-        $user->meds()->detach($id);
+        User::find(1)->meds()->detach($id);
         return response('Detached!', 204);
     }
 }
