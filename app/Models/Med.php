@@ -12,4 +12,9 @@ class Med extends Model
     public $timestamps = false;
 
     protected $fillable = [];
+
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User');
+    }
 }

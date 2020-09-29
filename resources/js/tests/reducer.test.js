@@ -1,5 +1,13 @@
 import { TestScheduler } from 'jest';
-import { initialState, reducer } from '../Pages/redux/store';
+import { initialState, reducer } from '../components/redux/store';
+import {
+    FETCH_MEDS_BEGIN,
+    FETCH_MEDS_SUCCESS,
+    FETCH_FIRST_MED,
+    FETCH_MEDS_FAILURE,
+    SORT_MEDS,
+    FILTER_MEDS
+} from '../Pages/redux/actions';
 
 const meds = [
     {id: 1, name: 'Acetamenophen', price: 150},
@@ -13,23 +21,28 @@ describe('reducer', () => {
         expect(reducer(undefined, {})).toEqual(initialState);
     });
 
-    test('handle FETCH_MEDS', () => {
-        expect(reducer({}, {type: 'FETCH_MEDS', meds: meds}))
-            .toEqual({meds: meds});
+    test('handle FETCH_MEDS_BEGIN', () => {
+        expect(reducer({}, {type: FETCH_MEDS_BEGIN}))
+            .toEqual({loading: true, error: null});
+    });
+
+    test('handle FETCH_MEDS_SUCCESS', () => {
+        expect(reducer({}, {type: FETCH_MEDS_SUCCESS, meds: meds}))
+            .toEqual({meds: meds, loading: false});
     });
     
     test('handle FETCH_FIRST_MED', () => {
-        expect(reducer({}, {type: 'FETCH_FIRST_MED', meds: meds}))
-            .toEqual({meds: meds});
+        expect(reducer({}, {type: FETCH_FIRST_MED, meds: meds}))
+            .toEqual({meds: meds, loading: false});
     });
 
-    test('handle FETCH_MEDS_ERROR', () => {
-        expect(reducer({}, {type: 'FETCH_MEDS_ERROR', error: error}))
-            .toEqual({error: error});
+    test('handle FETCH_MEDS_FAILURE', () => {
+        expect(reducer({}, {type: FETCH_MEDS_FAILURE, error: error}))
+            .toEqual({error: error, loading: false});
     });
 
     test('handle SORT_MEDS', () => {
-        expect(reducer({meds: meds}, {type: 'SORT_MEDS'}))
+        expect(reducer({meds: meds}, {type: SORT_MEDS}))
             .toEqual({meds: [
                 {id: 2, name: 'Ibuprofen', price: 250},
                 {id: 1, name: 'Acetamenophen', price: 150}
@@ -37,7 +50,7 @@ describe('reducer', () => {
     });
 
     test('handle FILTER_MEDS', () => {
-        expect(reducer({meds: meds}, {type: 'FILTER_MEDS'}))
+        expect(reducer({meds: meds}, {type: FILTER_MEDS}))
             .toEqual({meds: [
                 {id: 1, name: 'Acetamenophen', price: 150}
             ]});

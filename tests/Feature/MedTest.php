@@ -33,14 +33,31 @@ class MedTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testGuestCannotSearchMeds()
-    {
-        $this->get('/search/ibuprofen')->assertStatus(403);
-    }
+    // public function testGuestCannotSearchMeds()
+    // {
+    //     $this->get('/search/ibuprofen')->assertStatus(403);
+    // }
 
     public function testUserCanSearchFirst()
     {
         $this->actingAs(User::find(1))->get('/first/ibuprofen')
             ->assertStatus(200);
     }
+
+    public function testUserCanAttachMed()
+    {
+        $this->actingAs(User::find(1))->put('meds/5')
+            ->assertStatus(201);
+    }
+
+    public function testUserCanDetachMed()
+    {
+        $this->actingAs(User::find(1))->delete('/meds/5')
+            ->assertStatus(204);
+    }
+
+    // public function testGuestCannotAttachMed()
+    // {
+    //     $this->put('meds/5')->assertStatus(403);
+    // }
 }
