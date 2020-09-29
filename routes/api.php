@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\User;
+use App\Http\Resources\User as UserResource;
+use App\Http\Controllers\API\MedController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +19,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::apiResource('meds', MedController::class);
+
+Route::get('/search/{med}', [MedController::class, 'search']);
+
+Route::get('/first/{med}', [MedController::class, 'searchFirst']);
+
+Route::get('/users', function () {
+    return UserResource::collection(User::all());
 });

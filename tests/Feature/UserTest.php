@@ -17,6 +17,6 @@ class UserTest extends TestCase
 
     public function testRetrieveUserResources()
     {
-        $this->get('/users')->assertStatus(200);
+        $this->get('/api/users')->assertStatus(200);
     }
 }

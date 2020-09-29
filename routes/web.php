@@ -1,9 +1,5 @@
 <?php
 
-use App\Models\User;
-use App\Http\Resources\User as UserResource;
-use App\Http\Controllers\MedController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,16 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/medsearch', function () {
-    return Inertia\Inertia::render('MedSearch', ['user' => Auth::user()]);
-})->name('medsearch');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return Inertia\Inertia::render('Dashboard');
+})->name('dashboard');
 
-Route::resource('meds', MedController::class);
-
-Route::get('/search/{med}', [MedController::class, 'search']);
-
-Route::get('/first/{med}', [MedController::class, 'searchFirst']);
-
-Route::get('/users', function () {
-    return UserResource::collection(User::all());
-});

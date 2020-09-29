@@ -1,15 +1,23 @@
 require('./bootstrap');
 
-import { InertiaApp } from '@inertiajs/inertia-react'
-import React from 'react'
-import { render } from 'react-dom'
+import Vue from 'vue';
 
-const app = document.getElementById('app')
+import { InertiaApp } from '@inertiajs/inertia-vue';
+import { InertiaForm } from 'laravel-jetstream';
+import PortalVue from 'portal-vue';
 
-render(
-  <InertiaApp
-    initialPage={JSON.parse(app.dataset.page)}
-    resolveComponent={name => require(`./Pages/${name}`).default}
-  />,
-  app
-)
+Vue.use(InertiaApp);
+Vue.use(InertiaForm);
+Vue.use(PortalVue);
+
+const app = document.getElementById('app');
+
+new Vue({
+    render: (h) =>
+        h(InertiaApp, {
+            props: {
+                initialPage: JSON.parse(app.dataset.page),
+                resolveComponent: (name) => require(`./Pages/${name}`).default,
+            },
+        }),
+}).$mount(app);
