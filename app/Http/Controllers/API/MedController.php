@@ -2,30 +2,19 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Med;
 use App\Models\User;
-use App\Http\Resources\Med as MedResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class MedController extends Controller
 {
-    public function search($name)
+    public function __construct()
     {
-        $meds = Med::where('name', 'like', '%'. $name . '%')->get();
-        if (count($meds) > 0) {
-            return MedResource::collection($meds);
-        } else {
-            abort(404, 'Medication not found');
-        }
+        // $this->middleware('auth:api');
     }
 
-    public function searchFirst($name)
-    {
-        $med = Med::where('name', 'like', '%'. $name . '%')->firstOrFail();
-        return new MedResource($med);
-    }
-
+    // Eloquent relationship attach method will add row to the pivot table
+    // med_user to link the given medication(id) to the user(id). 
     public function update(Request $request, $id)
     {
         // $user = $request->user();
@@ -33,6 +22,8 @@ class MedController extends Controller
         return response('Attached!', 201);
     }
 
+    // Eloquent relationship detach method will delete row to the pivot table
+    // med_user to un-link the given medication(id) to the user(id). 
     public function destroy($id)
     {
         User::find(1)->meds()->detach($id);
