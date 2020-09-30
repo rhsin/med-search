@@ -14,13 +14,13 @@
 The user can search for medications and any similar name matches, then return a success or error alert. 
 They can also save the medication(s) to their account to view in the User Panel.
 
-![](/assets/MedSearch.png?raw=true)
+![](/public/MedSearch.png?raw=true)
 
 
 ### User Panel
 Here the user can view and remove their archived medications.
 
-![](/assets/UserPanel.png?raw=true)
+![](/public/UserPanel.png?raw=true)
 
 
 ## Built with 
