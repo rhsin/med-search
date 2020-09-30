@@ -1,8 +1,8 @@
-# Med-Search-Native
+# Med-Search (REST API)
 <table>
 <tr>
 <td>
-  A mobile app for searching & saving medication wholesale prices from Federal Supply contracts. This is another learning project to experiment with React-Native development for the firest time, using Laravel as a REST API. 
+  A mobile app for searching & saving medication wholesale prices from Federal Supply contracts. This is another learning project to experiment with React-Native development for the first time, using Laravel as a REST API. The database imports ~19,000 entries from the offical pricing excel sheet, querys through Eloquent ORM, and uses Passport for Oauth access tokens. See Med-Search-Native for frontend repository.
 </td>
 </tr>
 </table>
